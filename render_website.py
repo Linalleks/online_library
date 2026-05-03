@@ -3,12 +3,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-        "title": "Роковой поцелуй",
-        "author": "Патрацкая Наталья",
-        "img_src": "img/nopic.gif",
-        "book_path": "books/5648-Роковой поцелуй.txt",
-        "comments": [],
-        "genres": "Научная фантастика, Прочие Детективы, Прочие приключения."
+
 def main():
     with open('meta_data.json', 'r', encoding='utf-8') as file:
         books = json.load(file)
@@ -22,7 +17,6 @@ def main():
 
     rendered_page = template.render(
         books=books,
-        # wine_groups=wine_groups
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
