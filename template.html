@@ -12,7 +12,30 @@
   </head>
   <body>
     <div class="container">
-      <div class="row">
+      <nav class="row mt-4" aria-label="Books pages navigation">
+        <ul class="pagination">
+          {% if cur_page == 1 %}
+            <li class="page-item disabled"><span class="page-link">Назад</span></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="./index{{cur_page - 1}}.html">Назад</a></li>
+          {% endif %}
+          {% for page_num in range(1, count_pages + 1) %}
+            {% if page_num == cur_page %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="">{{page_num}}<span class="sr-only">(current)</span></a>
+              </li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="./index{{page_num}}.html">{{page_num}}</a></li>
+            {% endif %}
+          {% endfor %}
+          {% if cur_page == count_pages %}
+            <li class="page-item disabled"><span class="page-link">Вперёд</span></li>
+          {% else %}
+            <li class="page-item"><a class="page-link" href="./index{{cur_page + 1}}.html">Вперёд</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+      <div class="row">        
         {% for book in books %}
           <div class="card mb-3 col-6" style="max-width: 540px;">
             <div class="row no-gutters">

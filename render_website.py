@@ -11,6 +11,7 @@ def on_reload():
         books = json.load(file)
 
     pages = list(chunked(books, 20))
+    count_pages = len(pages)
 
     for num, books_page in enumerate(pages, 1):
         env = Environment(
@@ -22,6 +23,8 @@ def on_reload():
 
         rendered_page = template.render(
             books=books_page,
+            count_pages=count_pages,
+            cur_page=num
         )
 
         page_path = Path(f"pages/index{num}.html")
