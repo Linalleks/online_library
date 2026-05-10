@@ -2,6 +2,7 @@
 *.toml
 img/
 books/
+pages/
 
 # Bytecode и файлы интерпретатора
 __pycache__/
