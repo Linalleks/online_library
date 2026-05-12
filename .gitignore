@@ -1,7 +1,5 @@
 *.lock
 *.toml
-img/
-books/
 
 # Bytecode и файлы интерпретатора
 __pycache__/
