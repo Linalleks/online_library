@@ -1,23 +1,14 @@
 import json
-from more_itertools import chunked
 from pathlib import Path
-
-from dotenv import load_dotenv
-import click
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-from livereload import Server
 import shutil
 
+import click
+from dotenv import load_dotenv
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+from livereload import Server
+from more_itertools import chunked
+
 load_dotenv()
-
-
-@click.command(help='JSON_PATH: Путь к json-файлу с данными по книгам онлайн-библиотеки')
-@click.argument('json_path', envvar='JSON_PATH', default='meta_data.json', type=click.Path(exists=True))
-def main(json_path):
-    on_reload(json_path)
-    server = Server()
-    server.watch('template.html', on_reload(json_path))
-    server.serve(root='.', default_filename='./pages/index1.html')
 
 
 def on_reload(json_path):
@@ -49,6 +40,15 @@ def on_reload(json_path):
         page_path.parent.mkdir(parents=True, exist_ok=True)
         with page_path.open(mode='w', encoding="utf8") as file:
             file.write(rendered_page)
+
+
+@click.command(help='JSON_PATH: Путь к json-файлу с данными по книгам онлайн-библиотеки')
+@click.argument('json_path', envvar='JSON_PATH', default='meta_data.json', type=click.Path(exists=True))
+def main(json_path):
+    on_reload(json_path)
+    server = Server()
+    server.watch('template.html', on_reload(json_path))
+    server.serve(root='.', default_filename='./pages/index1.html')
 
 
 if __name__ == '__main__':
