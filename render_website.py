@@ -18,7 +18,7 @@ def on_reload(json_path):
     pages = list(chunked(books, 20))
     count_pages = len(pages)
 
-    pages_dir = Path("pages")
+    pages_dir = Path('pages')
     if pages_dir.exists() and pages_dir.is_dir():
         shutil.rmtree(pages_dir)
 
@@ -36,9 +36,9 @@ def on_reload(json_path):
             cur_page=num
         )
 
-        page_path = Path(f"pages/index{num}.html")
+        page_path = Path(f'pages/index{num}.html')
         page_path.parent.mkdir(parents=True, exist_ok=True)
-        with page_path.open(mode='w', encoding="utf8") as file:
+        with page_path.open(mode='w', encoding='utf8') as file:
             file.write(rendered_page)
 
 
