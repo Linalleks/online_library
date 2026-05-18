@@ -9,10 +9,11 @@ from livereload import Server
 from more_itertools import chunked
 
 load_dotenv()
+books_data = ''
 
 
-def on_reload(json_path):
-    with open(json_path, 'r', encoding='utf-8') as file:
+def on_reload():
+    with open(books_data, 'r', encoding='utf-8') as file:
         books = json.load(file)
 
     pages = list(chunked(books, 20))
@@ -45,9 +46,11 @@ def on_reload(json_path):
 @click.command(help='JSON_PATH: Путь к json-файлу с данными по книгам онлайн-библиотеки')
 @click.argument('json_path', envvar='JSON_PATH', default='meta_data.json', type=click.Path(exists=True))
 def main(json_path):
-    on_reload(json_path)
+    global books_data
+    books_data = json_path
+    on_reload()
     server = Server()
-    server.watch('template.html', on_reload(json_path))
+    server.watch('template.html', on_reload)
     server.serve(root='.', default_filename='./pages/index1.html')
 
 
