@@ -8,9 +8,6 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
 
-load_dotenv()
-books_data = ''
-
 
 def on_reload():
     with open(books_data, 'r', encoding='utf-8') as file:
@@ -55,4 +52,6 @@ def main(json_path):
 
 
 if __name__ == '__main__':
+    books_data = ''
+    load_dotenv()
     main()
