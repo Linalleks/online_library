@@ -1,5 +1,4 @@
-click==8.4.0
 Jinja2==3.1.6
 livereload==2.7.1
 more-itertools==11.0.2
-python_dotenv==1.2.2
+python-decouple==3.8
